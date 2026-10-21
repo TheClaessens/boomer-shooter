@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OVERTIME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/hud.css" />
+  </head>
+  <body>
+    <canvas id="game"></canvas>
+    <div id="vig"></div>
+    <div id="hurt"></div>
+    <div id="dir"></div>
+    <div id="flash"></div>
+    <div id="hud" hidden>
+      <div id="style">
+        <div id="rank">INTERN</div>
+        <div id="bar"><div id="fill"></div></div>
+        <div id="feed"></div>
+      </div>
+      <div id="tally">
+        <div id="score">0</div>
+        <div id="scoreadd"></div>
+        <div id="wave" hidden></div>
+        <div id="kills"></div>
+      </div>
+      <div id="boss" hidden>
+        <div id="bossname"></div>
+        <div id="bossbar"><div id="bosslag"></div><div id="bossfill"></div></div>
+      </div>
+      <div id="msg"></div>
+      <div id="banner"></div>
+      <div id="stamp">TERMINATED</div>
+      <div id="intro"><small id="introkick"></small><b id="introname"></b><span>CLOCKING IN&hellip;</span></div>
+      <div id="cross"></div>
+      <div id="hit"></div>
+      <div id="bottom">
+        <div class="stat"><span id="hp">100</span><label>HEALTH</label></div>
+        <div class="stat"><span id="ar">0</span><label>ARMOR</label></div>
+        <div id="facebox">
+          <canvas id="badge" width="40" height="48"></canvas>
+          <div id="dash"><i><u></u></i><i><u></u></i></div>
+        </div>
+        <div class="stat" id="ammobox"><span id="ammo">24</span><label id="ammolabel">SHELLS</label></div>
+        <table id="ammotab"></table>
+        <div id="armsbox"><div id="arms"></div><label>ARMS</label></div>
+        <div id="key" hidden title="Red keycard"></div>
+      </div>
+    </div>
+    <div id="screen"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1159 @@
+{
+ "persona": "dex",
+ "skill_note": "raw PT.batch rows, labelled by cell; key 'tactics' is the tacticsList entry; 'result' lost = died, unfinished = capped at maxSeconds 1500",
+ "batches": {
+  "default_casual": [
+   {
+    "tactics": "{}",
+    "wave": 6,
+    "time": 168,
+    "score": 64245,
+    "kills": 53,
+    "killedBy": "Compliance Officer shield bash",
+    "topDmg": {
+     "Burnout explosion": 74,
+     "Middle Manager staple fireball": 56,
+     "Toner Drum explosion": 37,
+     "Compliance Officer clipboard": 33
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 7,
+    "time": 248,
+    "score": 50103,
+    "kills": 61,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Sysadmin sniper shot": 75,
+     "Compliance Officer clipboard": 67,
+     "Burnout explosion": 43,
+     "Compliance Officer shield bash": 40
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 2,
+    "time": 32,
+    "score": 4145,
+    "kills": 14,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 108,
+     "Possessed Intern pistol": 6
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 6,
+    "time": 199,
+    "score": 42311,
+    "kills": 46,
+    "killedBy": "Compliance Officer shield bash",
+    "topDmg": {
+     "Burnout explosion": 135,
+     "Compliance Officer clipboard": 53,
+     "Middle Manager staple fireball": 32,
+     "Sysadmin sniper shot": 25
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 2,
+    "time": 35,
+    "score": 7984,
+    "kills": 13,
+    "killedBy": "Toner Drum explosion",
+    "topDmg": {
+     "Toner Drum explosion": 67,
+     "Burnout explosion": 44,
+     "Possessed Intern pistol": 11
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 2,
+    "time": 48,
+    "score": 4814,
+    "kills": 9,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Middle Manager staple fireball": 120,
+     "Burnout explosion": 34,
+     "Possessed Intern pistol": 13
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 3,
+    "time": 61,
+    "score": 11617,
+    "kills": 21,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 116,
+     "Possessed Intern pistol": 10
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 2,
+    "time": 34,
+    "score": 7810,
+    "kills": 14,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 100,
+     "Possessed Intern pistol": 14
+    },
+    "result": "lost"
+   }
+  ],
+  "default_average": [
+   {
+    "tactics": "{}",
+    "wave": 11,
+    "time": 1289,
+    "score": 337087,
+    "kills": 125,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Burnout explosion": 103,
+     "Sysadmin sniper shot": 100,
+     "Compliance Officer clipboard": 97,
+     "Compliance Officer shield bash": 53
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 9,
+    "time": 237,
+    "score": 175955,
+    "kills": 98,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 130,
+     "Middle Manager staple fireball": 40,
+     "Compliance Officer clipboard": 33,
+     "Mailroom Brute charge/punch": 33
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 12,
+    "time": 1039,
+    "score": 379669,
+    "kills": 156,
+    "killedBy": "Floating Printer ink blob",
+    "topDmg": {
+     "Sysadmin sniper shot": 217,
+     "Burnout explosion": 161,
+     "Floating Printer ink blob": 75,
+     "Compliance Officer clipboard": 73
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 2,
+    "time": 26,
+    "score": 2985,
+    "kills": 8,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 55,
+     "Toner Drum explosion": 50,
+     "unknown": 12,
+     "Possessed Intern pistol": 6
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 2,
+    "time": 1500,
+    "score": 3710,
+    "kills": 11,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 25,
+     "Middle Manager staple fireball": 12
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{}",
+    "wave": 7,
+    "time": 173,
+    "score": 49845,
+    "kills": 61,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 61,
+     "Mailroom Brute charge/punch": 42,
+     "Sysadmin sniper shot": 41,
+     "Compliance Officer shield bash": 27
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 6,
+    "time": 131,
+    "score": 46992,
+    "kills": 42,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 82,
+     "Mailroom Brute charge/punch": 50,
+     "Floating Printer ink blob": 40,
+     "Sysadmin sniper shot": 25
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 18,
+    "time": 741,
+    "score": 1597246,
+    "kills": 329,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Sysadmin sniper shot": 500,
+     "Burnout explosion": 347,
+     "Mailroom Brute charge/punch": 133,
+     "Middle Manager staple fireball": 124
+    },
+    "result": "lost"
+   }
+  ],
+  "default_expert": [
+   {
+    "tactics": "{}",
+    "wave": 21,
+    "time": 767,
+    "score": 2522406,
+    "kills": 482,
+    "killedBy": "Possessed Intern pistol",
+    "topDmg": {
+     "Sysadmin sniper shot": 350,
+     "Burnout explosion": 219,
+     "Mailroom Brute charge/punch": 117,
+     "Floating Printer ink blob": 106
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 11,
+    "time": 336,
+    "score": 435583,
+    "kills": 137,
+    "killedBy": "Recruiter fire pillar",
+    "topDmg": {
+     "Burnout explosion": 111,
+     "Sysadmin sniper shot": 67,
+     "Recruiter fire pillar": 50,
+     "Compliance Officer clipboard": 33
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 22,
+    "time": 798,
+    "score": 2961389,
+    "kills": 552,
+    "killedBy": "Mailroom Brute charge/punch",
+    "topDmg": {
+     "Sysadmin sniper shot": 417,
+     "Burnout explosion": 280,
+     "Mailroom Brute charge/punch": 133,
+     "Possessed Intern pistol": 104
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 26,
+    "time": 1315,
+    "score": 4477859,
+    "kills": 783,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Sysadmin sniper shot": 733,
+     "Burnout explosion": 713,
+     "Compliance Officer clipboard": 220,
+     "Mailroom Brute charge/punch": 167
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 25,
+    "time": 1050,
+    "score": 4244597,
+    "kills": 705,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Sysadmin sniper shot": 700,
+     "Burnout explosion": 291,
+     "Mailroom Brute charge/punch": 250,
+     "Floating Printer ink blob": 168
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 5,
+    "time": 138,
+    "score": 58492,
+    "kills": 40,
+    "killedBy": "Compliance Officer clipboard",
+    "topDmg": {
+     "Burnout explosion": 71,
+     "Compliance Officer clipboard": 60,
+     "Compliance Officer shield bash": 27,
+     "Middle Manager staple fireball": 12
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 12,
+    "time": 320,
+    "score": 567151,
+    "kills": 174,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 252,
+     "Sysadmin sniper shot": 50,
+     "Compliance Officer clipboard": 27,
+     "Mailroom Brute charge/punch": 17
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{}",
+    "wave": 8,
+    "time": 240,
+    "score": 188020,
+    "kills": 87,
+    "killedBy": "Recruiter fire pillar",
+    "topDmg": {
+     "Toner Drum explosion": 76,
+     "Sysadmin sniper shot": 50,
+     "Recruiter fire pillar": 50,
+     "Burnout explosion": 41
+    },
+    "result": "lost"
+   }
+  ],
+  "stance_floor": [
+   {
+    "tactics": "{\"stance\":\"floor\"}",
+    "wave": 31,
+    "time": 1462,
+    "score": 7589575,
+    "kills": 1241,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Sysadmin sniper shot": 917,
+     "Burnout explosion": 871,
+     "Floating Printer ink blob": 251,
+     "Mailroom Brute charge/punch": 217
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"stance\":\"floor\"}",
+    "wave": 11,
+    "time": 316,
+    "score": 346420,
+    "kills": 132,
+    "killedBy": "Mailroom Brute charge/punch",
+    "topDmg": {
+     "Sysadmin sniper shot": 124,
+     "Burnout explosion": 98,
+     "Compliance Officer clipboard": 77,
+     "Toner Drum explosion": 77
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"floor\"}",
+    "wave": 30,
+    "time": 1437,
+    "score": 7025031,
+    "kills": 1064,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Sysadmin sniper shot": 1008,
+     "Burnout explosion": 647,
+     "Mailroom Brute charge/punch": 250,
+     "Floating Printer ink blob": 181
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"floor\"}",
+    "wave": 30,
+    "time": 1468,
+    "score": 7253178,
+    "kills": 1121,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 771,
+     "Sysadmin sniper shot": 550,
+     "Floating Printer ink blob": 210,
+     "Mailroom Brute charge/punch": 200
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"stance\":\"floor\"}",
+    "wave": 17,
+    "time": 626,
+    "score": 1384284,
+    "kills": 338,
+    "killedBy": "Floating Printer ink blob",
+    "topDmg": {
+     "Burnout explosion": 274,
+     "Sysadmin sniper shot": 183,
+     "Mailroom Brute charge/punch": 100,
+     "Possessed Intern pistol": 87
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"floor\"}",
+    "wave": 26,
+    "time": 1051,
+    "score": 4382184,
+    "kills": 779,
+    "killedBy": "Middle Manager staple fireball",
+    "topDmg": {
+     "Sysadmin sniper shot": 433,
+     "Burnout explosion": 422,
+     "Mailroom Brute charge/punch": 150,
+     "Recruiter fire pillar": 133
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"floor\"}",
+    "wave": 4,
+    "time": 86,
+    "score": 52873,
+    "kills": 33,
+    "killedBy": "Compliance Officer shield bash",
+    "topDmg": {
+     "Compliance Officer shield bash": 80,
+     "Burnout explosion": 39,
+     "Compliance Officer clipboard": 13,
+     "Middle Manager staple fireball": 8
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"floor\"}",
+    "wave": 13,
+    "time": 365,
+    "score": 783503,
+    "kills": 200,
+    "killedBy": "Middle Manager staple fireball",
+    "topDmg": {
+     "Burnout explosion": 98,
+     "Middle Manager staple fireball": 40,
+     "Sysadmin sniper shot": 33,
+     "Recruiter fire pillar": 33
+    },
+    "result": "lost"
+   }
+  ],
+  "stance_deck": [
+   {
+    "tactics": "{\"stance\":\"deck\"}",
+    "wave": 14,
+    "time": 1494,
+    "score": 966978,
+    "kills": 227,
+    "killedBy": "Possessed Intern pistol",
+    "topDmg": {
+     "Sysadmin sniper shot": 83,
+     "Middle Manager staple fireball": 28,
+     "Compliance Officer clipboard": 27,
+     "Possessed Intern pistol": 20
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"stance\":\"deck\"}",
+    "wave": 15,
+    "time": 484,
+    "score": 1011248,
+    "kills": 237,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Sysadmin sniper shot": 267,
+     "Middle Manager staple fireball": 88,
+     "Recruiter fire pillar": 83,
+     "Compliance Officer clipboard": 60
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"deck\"}",
+    "wave": 21,
+    "time": 858,
+    "score": 2316003,
+    "kills": 464,
+    "killedBy": "Compliance Officer shield bash",
+    "topDmg": {
+     "Sysadmin sniper shot": 400,
+     "Mailroom Brute charge/punch": 233,
+     "Floating Printer ink blob": 215,
+     "Burnout explosion": 184
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"deck\"}",
+    "wave": 14,
+    "time": 1493,
+    "score": 945546,
+    "kills": 234,
+    "killedBy": "Floating Printer ink blob",
+    "topDmg": {
+     "Burnout explosion": 152,
+     "Sysadmin sniper shot": 150,
+     "Compliance Officer clipboard": 120,
+     "Toner Drum explosion": 111
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"stance\":\"deck\"}",
+    "wave": 8,
+    "time": 1498,
+    "score": 240780,
+    "kills": 88,
+    "killedBy": "Compliance Officer clipboard",
+    "topDmg": {
+     "Compliance Officer clipboard": 20,
+     "Burnout explosion": 18,
+     "Compliance Officer shield bash": 13,
+     "Possessed Intern pistol": 6
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"stance\":\"deck\"}",
+    "wave": 7,
+    "time": 227,
+    "score": 135930,
+    "kills": 61,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 84,
+     "Compliance Officer clipboard": 47,
+     "Sysadmin sniper shot": 33,
+     "Compliance Officer shield bash": 27
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"deck\"}",
+    "wave": 5,
+    "time": 1499,
+    "score": 118071,
+    "kills": 45,
+    "killedBy": "Possessed Intern pistol",
+    "topDmg": {
+     "Floating Printer ink blob": 6,
+     "Possessed Intern pistol": 3
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"stance\":\"deck\"}",
+    "wave": 10,
+    "time": 1497,
+    "score": 392194,
+    "kills": 129,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Sysadmin sniper shot": 33,
+     "Burnout explosion": 32,
+     "Possessed Intern pistol": 9,
+     "Compliance Officer clipboard": 7
+    },
+    "result": "unfinished (cap 1500s)"
+   }
+  ],
+  "stance_island": [
+   {
+    "tactics": "{\"stance\":\"island\"}",
+    "wave": 30,
+    "time": 1446,
+    "score": 7361755,
+    "kills": 1143,
+    "killedBy": "Floating Printer ink blob",
+    "topDmg": {
+     "Sysadmin sniper shot": 1517,
+     "Burnout explosion": 994,
+     "Mailroom Brute charge/punch": 639,
+     "Floating Printer ink blob": 481
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"stance\":\"island\"}",
+    "wave": 31,
+    "time": 1418,
+    "score": 6401718,
+    "kills": 1148,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 1195,
+     "Sysadmin sniper shot": 950,
+     "Mailroom Brute charge/punch": 667,
+     "Floating Printer ink blob": 544
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"island\"}",
+    "wave": 19,
+    "time": 677,
+    "score": 1787612,
+    "kills": 402,
+    "killedBy": "Recruiter fire pillar",
+    "topDmg": {
+     "Sysadmin sniper shot": 483,
+     "Mailroom Brute charge/punch": 367,
+     "Floating Printer ink blob": 136,
+     "Burnout explosion": 132
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"island\"}",
+    "wave": 16,
+    "time": 455,
+    "score": 1158179,
+    "kills": 285,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 344,
+     "Floating Printer ink blob": 166,
+     "Mailroom Brute charge/punch": 150,
+     "Sysadmin sniper shot": 150
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"island\"}",
+    "wave": 13,
+    "time": 353,
+    "score": 640174,
+    "kills": 181,
+    "killedBy": "Mailroom Brute charge/punch",
+    "topDmg": {
+     "Sysadmin sniper shot": 200,
+     "Mailroom Brute charge/punch": 133,
+     "Burnout explosion": 91,
+     "Compliance Officer clipboard": 87
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"island\"}",
+    "wave": 6,
+    "time": 160,
+    "score": 120322,
+    "kills": 56,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Compliance Officer clipboard": 87,
+     "Floating Printer ink blob": 19,
+     "Sysadmin sniper shot": 17,
+     "Compliance Officer shield bash": 13
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"island\"}",
+    "wave": 26,
+    "time": 1035,
+    "score": 4398277,
+    "kills": 780,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Sysadmin sniper shot": 683,
+     "Burnout explosion": 658,
+     "Mailroom Brute charge/punch": 367,
+     "Floating Printer ink blob": 357
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"island\"}",
+    "wave": 15,
+    "time": 441,
+    "score": 914353,
+    "kills": 261,
+    "killedBy": "Recruiter fire pillar",
+    "topDmg": {
+     "Burnout explosion": 288,
+     "Sysadmin sniper shot": 267,
+     "Mailroom Brute charge/punch": 100,
+     "Compliance Officer shield bash": 95
+    },
+    "result": "lost"
+   }
+  ],
+  "stance_mobile": [
+   {
+    "tactics": "{\"stance\":\"mobile\"}",
+    "wave": 17,
+    "time": 518,
+    "score": 1387969,
+    "kills": 340,
+    "killedBy": "Recruiter fire pillar",
+    "topDmg": {
+     "Burnout explosion": 385,
+     "Sysadmin sniper shot": 217,
+     "Floating Printer ink blob": 156,
+     "Toner Drum explosion": 130
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"mobile\"}",
+    "wave": 24,
+    "time": 903,
+    "score": 3235408,
+    "kills": 645,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Sysadmin sniper shot": 717,
+     "Burnout explosion": 682,
+     "Mailroom Brute charge/punch": 233,
+     "Floating Printer ink blob": 222
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"mobile\"}",
+    "wave": 31,
+    "time": 1454,
+    "score": 7032886,
+    "kills": 1185,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Sysadmin sniper shot": 1317,
+     "Burnout explosion": 1202,
+     "Mailroom Brute charge/punch": 673,
+     "Floating Printer ink blob": 459
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"stance\":\"mobile\"}",
+    "wave": 31,
+    "time": 1451,
+    "score": 7334345,
+    "kills": 1252,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Sysadmin sniper shot": 1291,
+     "Burnout explosion": 1128,
+     "Mailroom Brute charge/punch": 441,
+     "Floating Printer ink blob": 358
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"stance\":\"mobile\"}",
+    "wave": 8,
+    "time": 147,
+    "score": 196442,
+    "kills": 78,
+    "killedBy": "Compliance Officer clipboard",
+    "topDmg": {
+     "Burnout explosion": 98,
+     "Toner Drum explosion": 39,
+     "Middle Manager staple fireball": 16,
+     "Floating Printer ink blob": 14
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"mobile\"}",
+    "wave": 15,
+    "time": 458,
+    "score": 1045972,
+    "kills": 245,
+    "killedBy": "Recruiter fire pillar",
+    "topDmg": {
+     "Burnout explosion": 292,
+     "Sysadmin sniper shot": 267,
+     "Toner Drum explosion": 182,
+     "Recruiter fire pillar": 100
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"mobile\"}",
+    "wave": 29,
+    "time": 1247,
+    "score": 6025333,
+    "kills": 981,
+    "killedBy": "Floating Printer ink blob",
+    "topDmg": {
+     "Sysadmin sniper shot": 950,
+     "Burnout explosion": 841,
+     "Mailroom Brute charge/punch": 417,
+     "Floating Printer ink blob": 341
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"stance\":\"mobile\"}",
+    "wave": 22,
+    "time": 765,
+    "score": 2626734,
+    "kills": 525,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 654,
+     "Sysadmin sniper shot": 550,
+     "Mailroom Brute charge/punch": 267,
+     "Compliance Officer clipboard": 173
+    },
+    "result": "lost"
+   }
+  ],
+  "target_nearest": [
+   {
+    "tactics": "{\"target\":\"nearest\"}",
+    "wave": 29,
+    "time": 1305,
+    "score": 5688989,
+    "kills": 986,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Sysadmin sniper shot": 700,
+     "Burnout explosion": 644,
+     "Compliance Officer clipboard": 173,
+     "Floating Printer ink blob": 153
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"nearest\"}",
+    "wave": 6,
+    "time": 1499,
+    "score": 140303,
+    "kills": 57,
+    "killedBy": "Possessed Intern pistol",
+    "topDmg": {
+     "Burnout explosion": 26,
+     "Possessed Intern pistol": 7,
+     "Compliance Officer clipboard": 7,
+     "Toner Drum explosion": 2
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"target\":\"nearest\"}",
+    "wave": 31,
+    "time": 1462,
+    "score": 7491412,
+    "kills": 1161,
+    "killedBy": "Compliance Officer clipboard",
+    "topDmg": {
+     "Sysadmin sniper shot": 900,
+     "Burnout explosion": 815,
+     "Mailroom Brute charge/punch": 317,
+     "Recruiter fire pillar": 183
+    },
+    "result": "unfinished (cap 1500s)"
+   },
+   {
+    "tactics": "{\"target\":\"nearest\"}",
+    "wave": 9,
+    "time": 225,
+    "score": 188023,
+    "kills": 96,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Burnout explosion": 79,
+     "Mailroom Brute charge/punch": 67,
+     "Sysadmin sniper shot": 50,
+     "Recruiter fire pillar": 17
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"nearest\"}",
+    "wave": 16,
+    "time": 535,
+    "score": 1104397,
+    "kills": 261,
+    "killedBy": "Compliance Officer clipboard",
+    "topDmg": {
+     "Sysadmin sniper shot": 183,
+     "Burnout explosion": 152,
+     "Toner Drum explosion": 46,
+     "Possessed Intern pistol": 35
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"nearest\"}",
+    "wave": 14,
+    "time": 457,
+    "score": 886384,
+    "kills": 220,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 173,
+     "Sysadmin sniper shot": 100,
+     "Compliance Officer shield bash": 67,
+     "Compliance Officer clipboard": 60
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"nearest\"}",
+    "wave": 24,
+    "time": 956,
+    "score": 3758021,
+    "kills": 677,
+    "killedBy": "Recruiter fire pillar",
+    "topDmg": {
+     "Sysadmin sniper shot": 483,
+     "Burnout explosion": 461,
+     "Compliance Officer clipboard": 140,
+     "Floating Printer ink blob": 103
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"nearest\"}",
+    "wave": 27,
+    "time": 1224,
+    "score": 4652847,
+    "kills": 846,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Burnout explosion": 554,
+     "Sysadmin sniper shot": 483,
+     "Mailroom Brute charge/punch": 233,
+     "Compliance Officer clipboard": 153
+    },
+    "result": "lost"
+   }
+  ],
+  "target_threats-first": [
+   {
+    "tactics": "{\"target\":\"threats-first\"}",
+    "wave": 15,
+    "time": 422,
+    "score": 881244,
+    "kills": 235,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Toner Drum explosion": 121,
+     "Burnout explosion": 115,
+     "Mailroom Brute charge/punch": 100,
+     "Floating Printer ink blob": 61
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"threats-first\"}",
+    "wave": 17,
+    "time": 506,
+    "score": 1232942,
+    "kills": 292,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 243,
+     "Mailroom Brute charge/punch": 233,
+     "Compliance Officer clipboard": 67,
+     "Possessed Intern pistol": 64
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"threats-first\"}",
+    "wave": 21,
+    "time": 729,
+    "score": 2100675,
+    "kills": 472,
+    "killedBy": "Sysadmin sniper shot",
+    "topDmg": {
+     "Burnout explosion": 431,
+     "Mailroom Brute charge/punch": 150,
+     "Compliance Officer clipboard": 120,
+     "Sysadmin sniper shot": 100
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"threats-first\"}",
+    "wave": 23,
+    "time": 886,
+    "score": 2950854,
+    "kills": 596,
+    "killedBy": "Toner Drum explosion",
+    "topDmg": {
+     "Mailroom Brute charge/punch": 283,
+     "Burnout explosion": 281,
+     "Toner Drum explosion": 184,
+     "Floating Printer ink blob": 138
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"threats-first\"}",
+    "wave": 32,
+    "time": 1382,
+    "score": 7505160,
+    "kills": 1247,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Mailroom Brute charge/punch": 667,
+     "Burnout explosion": 632,
+     "Floating Printer ink blob": 266,
+     "Compliance Officer clipboard": 260
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"threats-first\"}",
+    "wave": 14,
+    "time": 423,
+    "score": 770113,
+    "kills": 226,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 184,
+     "Compliance Officer clipboard": 60,
+     "Middle Manager staple fireball": 48,
+     "unknown": 47
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"threats-first\"}",
+    "wave": 16,
+    "time": 577,
+    "score": 1447975,
+    "kills": 315,
+    "killedBy": "Compliance Officer clipboard",
+    "topDmg": {
+     "Burnout explosion": 144,
+     "Mailroom Brute charge/punch": 139,
+     "Compliance Officer clipboard": 67,
+     "Toner Drum explosion": 51
+    },
+    "result": "lost"
+   },
+   {
+    "tactics": "{\"target\":\"threats-first\"}",
+    "wave": 14,
+    "time": 358,
+    "score": 825800,
+    "kills": 208,
+    "killedBy": "Burnout explosion",
+    "topDmg": {
+     "Burnout explosion": 164,
+     "Mailroom Brute charge/punch": 100,
+     "Compliance Officer clipboard": 47,
+     "Sysadmin sniper shot": 33
+    },
+    "result": "lost"
+   }
+  ]
+ },
+ "manualProbe": {
+  "note": "manual probe run, average skill, default tactics, PT.start({}) + PT.play(60s, stopAt: []) loop; this run DID set the persona best score",
+  "wave": 8,
+  "time": 229,
+  "score": 200745,
+  "kills": 93,
+  "killedBy": "Middle Manager staple fireball",
+  "damageTakenBy": {
+   "Burnout explosion": 146,
+   "Middle Manager staple fireball": 56,
+   "Sysadmin sniper shot": 50,
+   "Floating Printer ink blob": 25,
+   "Possessed Intern pistol": 21,
+   "Compliance Officer clipboard": 13
+  },
+  "waveHp": [
+   {
+    "wave": 1,
+    "hpStart": 100,
+    "hpEnd": 100,
+    "time": 11
+   },
+   {
+    "wave": 2,
+    "hpStart": 100,
+    "hpEnd": 75,
+    "time": 35
+   },
+   {
+    "wave": 3,
+    "hpStart": 75,
+    "hpEnd": 99,
+    "time": 52
+   },
+   {
+    "wave": 4,
+    "hpStart": 100,
+    "hpEnd": 93,
+    "time": 99
+   },
+   {
+    "wave": 5,
+    "hpStart": 93,
+    "hpEnd": 100,
+    "time": 122
+   },
+   {
+    "wave": 6,
+    "hpStart": 100,
+    "hpEnd": 69,
+    "time": 154
+   },
+   {
+    "wave": 7,
+    "hpStart": 99,
+    "hpEnd": 100,
+    "time": 186
+   },
+   {
+    "wave": 8,
+    "hpStart": 100,
+    "hpEnd": 3,
+    "time": 229
+   }
+  ],
+  "result": "lost"
+ }
+}

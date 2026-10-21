@@ -75,27 +75,29 @@ function build() {
   };
   const pivot = (parent, x, y, z) => { const g = new THREE.Group(); g.position.set(x, y, z); parent.add(g); return g; };
   const glow = (color) => new THREE.MeshBasicMaterial({ color });
-  const SUIT = 0x2e2a44, STRIPE = 0x5a5a7a, SKIN = 0xd0a080, SHIRT = 0xe8e4d8, GOLD = glow(0xffc020);
+  // Dressed like the photo: a beige tunic under a draped grey-brown robe, sandals, a bowl of bitterballen.
+  const ROBE = 0x6e6252, FOLD = 0x5a5042, TUNIC = 0xd8cdb4, SKIN = 0xd0a080, SANDAL = 0x6a4428;
+  const BAL = 0x9a5420, CRUST = 0x7a3a12, MUSTARD = 0xe0b020;
 
   const legs = [];
   for (const s of [-1, 1]) {
-    const l = pivot(root, s * 0.55, 1.8, 0);
-    part(l, 0.62, 1.8, 0.66, SUIT, 0, -0.9, 0);
-    part(l, 0.04, 1.6, 0.04, STRIPE, 0.15, -0.9, 0.34);
-    part(l, 0.72, 0.3, 1.05, 0x0c0c0e, 0, -1.65, 0.15);
+    const l = pivot(root, s * 0.5, 1.8, 0);
+    part(l, 0.58, 1.8, 0.62, TUNIC, 0, -0.9, 0);
+    part(l, 0.5, 0.2, 0.7, SKIN, 0, -1.7, 0.12); // bare feet
+    part(l, 0.6, 0.08, 0.9, SANDAL, 0, -1.78, 0.14);
+    part(l, 0.62, 0.06, 0.1, SANDAL, 0, -1.62, 0.2); // strap
     legs.push(l);
   }
   const body = pivot(root, 0, 1.8, 0);
-  part(body, 1.7, 0.4, 0.95, SUIT, 0, 0.1, 0);
-  part(body, 0.34, 0.24, 0.05, 0, 0, 0.1, 0.49, GOLD);
-  part(body, 2.1, 1.55, 1.15, SUIT, 0, 1.0, 0);
-  for (const x of [-0.85, -0.6, 0.6, 0.85]) part(body, 0.04, 1.4, 0.02, STRIPE, x, 1.0, 0.58);
-  part(body, 0.6, 1.1, 0.02, SHIRT, 0, 1.2, 0.585);
-  for (const s of [-1, 1]) part(body, 0.32, 1.0, 0.03, 0x111118, s * 0.42, 1.25, 0.59).rotation.z = s * 0.28;
-  part(body, 0.24, 0.95, 0.05, 0, 0, 1.15, 0.61, GOLD); // the golden tie
-  part(body, 0.34, 0.2, 0.07, 0, 0, 1.66, 0.61, GOLD);
-  part(body, 0.26, 0.14, 0.03, 0xc01818, 0.72, 1.45, 0.59);
-  part(body, 2.55, 0.38, 1.25, SUIT, 0, 1.65, 0);
+  part(body, 2.0, 1.35, 1.2, TUNIC, 0, -0.55, 0); // hem of the tunic, down to the shins
+  part(body, 2.1, 1.75, 1.15, TUNIC, 0, 0.9, 0);
+  part(body, 0.7, 0.5, 0.05, 0xc8bca0, 0, 1.6, 0.58); // neckline
+  // The robe: a back panel and a sash over the left shoulder, falling to the right hip.
+  part(body, 2.3, 2.9, 0.35, ROBE, 0, 0.3, -0.5);
+  const sash = part(body, 1.0, 2.9, 1.3, ROBE, 0, 0.55, 0.05);
+  sash.rotation.z = -0.55;
+  for (const x of [-0.25, 0.25]) part(body, 0.06, 2.6, 1.32, FOLD, x, 0.55, 0.05).rotation.z = -0.55;
+  part(body, 2.55, 0.4, 1.25, ROBE, 0, 1.68, 0); // draped over both shoulders
   part(body, 0.55, 0.3, 0.55, SKIN, 0, 1.9, 0);
 
   const head = pivot(body, 0, 2.4, 0.05);
@@ -110,9 +112,8 @@ function build() {
   const eyeMat = glow(0xffd040);
   eyeMat.side = THREE.DoubleSide;
   const halo = new THREE.Mesh(flatRing, eyeMat);
-  halo.rotation.x = -Math.PI / 2 + 0.25;
-  halo.scale.setScalar(0.55);
-  halo.position.set(0, 0.95, -0.15);
+  halo.scale.setScalar(0.75); // upright behind the head, like the icons
+  halo.position.set(0, 0.35, -0.5);
   head.add(halo);
   const stars = pivot(head, 0, 0.95, 0);
   for (let i = 0; i < 3; i++) part(stars, 0.16, 0.16, 0.16, 0, Math.cos(i * 2.1) * 0.75, 0, Math.sin(i * 2.1) * 0.75, glow(0xffee40));
@@ -121,27 +122,30 @@ function build() {
   const arms = [], palms = [];
   for (const s of [-1, 1]) {
     const a = pivot(body, s * 1.35, 1.55, 0);
-    part(a, 0.52, 1.6, 0.56, SUIT, 0, -0.8, 0);
-    part(a, 0.58, 0.16, 0.62, SHIRT, 0, -1.56, 0);
-    part(a, 0.1, 0.1, 0.1, 0, s * 0.3, -1.56, 0.1, GOLD);
-    part(a, 0.52, 0.5, 0.52, SKIN, 0, -1.85, 0);
-    for (const x of [-0.16, 0, 0.16]) part(a, 0.08, 0.22, 0.08, 0x1a0a08, x, -2.15, 0.12);
+    part(a, 0.62, 1.3, 0.66, ROBE, 0, -0.65, 0); // wide robe sleeve
+    part(a, 0.48, 0.4, 0.5, TUNIC, 0, -1.45, 0);
+    part(a, 0.46, 0.5, 0.46, SKIN, 0, -1.85, 0);
+    for (const x of [-0.14, 0, 0.14]) part(a, 0.08, 0.2, 0.08, SKIN, x, -2.15, 0.1);
+    if (s > 0) { part(a, 0.32, 0.32, 0.32, BAL, 0, -2.2, 0.32); part(a, 0.36, 0.2, 0.2, CRUST, 0, -2.2, 0.32); } // one bitterbal in hand
     const palm = part(a, 0.7, 0.7, 0.7, 0, 0, -1.9, 0, new THREE.MeshBasicMaterial({ color: 0xff8020, transparent: true, opacity: 0.6 }));
     palm.visible = false;
     palms.push(palm);
     arms.push(a);
   }
-  // The briefcase (left hand). Its lid opens for the hiring spree.
-  const caseG = pivot(arms[0], 0, -2.3, 0.15);
-  part(caseG, 0.25, 0.75, 1.0, 0x2a160c, 0, -0.3, 0);
-  part(caseG, 0.27, 0.12, 0.25, 0, 0, -0.05, 0, GOLD);
-  const lid = pivot(caseG, 0.13, -0.68, 0);
-  part(lid, 0.06, 0.1, 1.0, 0x3a2010, 0, 0.05, 0);
-  const papers = part(caseG, 0.02, 0.6, 0.9, 0, 0.14, -0.3, 0, glow(0xff3020));
+  // The bowl of bitterballen with a mustard dip (left hand). The napkin (lid) flips up for the hiring spree.
+  const caseG = pivot(arms[0], 0, -2.1, 0.45);
+  part(caseG, 1.05, 0.3, 1.05, 0x8a4a28, 0, 0, 0);
+  part(caseG, 0.85, 0.06, 0.85, 0x5a2a14, 0, 0.16, 0);
+  for (const [x, z] of [[-0.25, -0.25], [0.05, -0.3], [-0.3, 0.1], [0, 0.05], [0.15, 0.3], [-0.12, 0.32]]) part(caseG, 0.24, 0.24, 0.24, BAL, x, 0.27, z);
+  part(caseG, 0.3, 0.1, 0.3, 0xd8d0c0, 0.28, 0.2, -0.05);
+  part(caseG, 0.22, 0.04, 0.22, MUSTARD, 0.28, 0.26, -0.05);
+  const lid = pivot(caseG, -0.5, 0.2, 0);
+  part(lid, 0.06, 0.4, 0.6, 0xe8e0d0, 0, 0.2, 0);
+  const papers = part(caseG, 0.9, 0.02, 0.9, 0, 0, 0.42, 0, glow(0xff3020));
   papers.visible = false;
 
   // Fireball forming in front of the chest during the fan tell.
-  const orb = part(body, 1, 1, 1, 0, 0, 1.2, 1.5, new THREE.MeshBasicMaterial({ color: 0xffa020 }));
+  const orb = part(body, 1, 1, 1, 0, 0, 1.2, 1.5, new THREE.MeshBasicMaterial({ color: 0xc06a20 })); // a giant bitterbal
   orb.scale.setScalar(0.01);
   orb.visible = false;
   // Phase 3 golden parachute: canopy + lines, hidden until it pops.
@@ -166,25 +170,44 @@ function build() {
   light.position.set(0, 1.4, 1.6);
   body.add(light);
 
-  // The fly: Bart's face on a buzzing black body, hidden until he shrinks.
-  const fly = pivot(root, 0, 0.8, 0);
-  fly.scale.setScalar(1.8); // big enough to spot (and hit) at night
-  part(fly, 0.4, 0.34, 0.55, 0x101014, 0, 0, -0.1);
-  part(fly, 0.5, 0.5, 0.01, 0, 0, 0.05, 0.19, new THREE.MeshBasicMaterial({ map: faceTex })); // unlit: findable at night
-  const flyHalo = new THREE.Mesh(flatRing, eyeMat);
-  flyHalo.rotation.x = -Math.PI / 2 + 0.25;
-  flyHalo.scale.setScalar(0.28);
-  flyHalo.position.set(0, 0.42, 0.05);
-  fly.add(flyHalo);
-  const wings = [-1, 1].map((s) => {
-    const w = pivot(fly, s * 0.18, 0.18, -0.15);
-    part(w, 0.7, 0.02, 0.4, 0, s * 0.35, 0, 0, new THREE.MeshBasicMaterial({ color: 0xc8e0ff, transparent: true, opacity: 0.6 }));
-    return w;
-  });
+  const { fly, wings } = makeFly(root, eyeMat);
   fly.visible = false;
 
   return { root, mats, legs, arms: [], limbs: arms, body, head, palms, lid, papers, orb, chute, stars, slamRing, lane, eyeMat, light, fly, wings };
 }
+
+// The fly: Bart's face (unlit, so you can find it at night) on a buzzing black body with a mini halo. Bart turns
+// into one; the decoys are the same model.
+function makeFly(root, haloMat) {
+  const fly = new THREE.Group(), add = (w, h, d, m, x, y, z, parent = fly) => {
+    const mesh = new THREE.Mesh(cube, m);
+    mesh.scale.set(w, h, d);
+    mesh.position.set(x, y, z);
+    parent.add(mesh);
+    return mesh;
+  };
+  fly.position.y = 0.8;
+  fly.scale.setScalar(1.8); // big enough to spot (and hit) at night
+  root.add(fly);
+  add(0.4, 0.34, 0.55, new THREE.MeshLambertMaterial({ color: 0x101014 }), 0, 0, -0.1);
+  add(0.5, 0.5, 0.01, new THREE.MeshBasicMaterial({ map: imageTexture(BART, 256) }), 0, 0.05, 0.19);
+  const halo = new THREE.Mesh(flatRing, haloMat);
+  halo.rotation.x = -Math.PI / 2 + 0.25;
+  halo.scale.setScalar(0.28);
+  halo.position.set(0, 0.42, 0.05);
+  fly.add(halo);
+  const wingMat = new THREE.MeshBasicMaterial({ color: 0xc8e0ff, transparent: true, opacity: 0.6 });
+  const wings = [-1, 1].map((s) => {
+    const w = new THREE.Group();
+    w.position.set(s * 0.18, 0.18, -0.15);
+    fly.add(w);
+    add(0.7, 0.02, 0.4, wingMat, s * 0.35, 0, 0, w);
+    return w;
+  });
+  return { fly, wings };
+}
+
+const flap = (wings, t) => wings.forEach((w, i) => { w.rotation.z = Math.sin(t * 60) * 0.6 * (i ? 1 : -1); });
 
 // ── helpers ──────────────────────────────────────────────────────────────────────────────
 const wrap = (a) => Math.atan2(Math.sin(a), Math.cos(a));
@@ -340,7 +363,27 @@ function toFly(g, e) {
   e.flyFrom = e.pos.clone();
   e.perch = perchSpot(g, e);
   e.flyA = e.pos.clone();
+  // Decoys: one more per phase, each on its own wall. Which one is the real Bart?
+  const spots = [e.perch];
+  for (let i = 0; i < 1 + e.ph; i++) {
+    let s = perchSpot(g, e);
+    for (let k = 0; k < 10 && spots.some((q) => Math.hypot(q.x - s.x, q.z - s.z) < 5); k++) s = perchSpot(g, e);
+    spots.push(s);
+    const d = addEnemy(g, 'bartfly', e.pos.x, e.pos.y, e.pos.z);
+    d.bart = e;
+    e.decoys.push({ d, to: s });
+  }
   setAct(e, 'flyTo', 1.4);
+}
+
+function popDecoys(g, e) {
+  for (const { d } of e.decoys) {
+    if (d.dead) continue;
+    d.dead = true;
+    d.root.visible = false;
+    g.fx.burst(v.set(d.pos.x, d.pos.y + 0.8, d.pos.z), 0x1a1a1a, 10, 4, 0.1, 0.5);
+  }
+  e.decoys.length = 0;
 }
 
 // Back to full size at (x, y, z); the regular movement code drops him to the floor.
@@ -351,15 +394,16 @@ function toBig(g, e, x, y, z) {
   e.r = e.bigR; e.h = e.bigH;
   e.pos.set(x, y, z);
   e.vy = 0;
-  e.flyT = rand(22, 30) * cdMul(e);
+  e.flyT = rand(10, 14) * cdMul(e); // it's a running joke: often
 }
 
-// Glide from e.flyA to `to` along an arc over the actT window.
-function glide(e, to, k) {
-  e.pos.lerpVectors(e.flyA, to, k);
-  e.pos.y += Math.sin(k * Math.PI) * 3;
-  const dx = to.x - e.flyA.x, dz = to.z - e.flyA.z;
-  if (dx || dz) e.yaw = Math.atan2(dx, dz);
+// Glide a body from `from` to `to` along an arc (k 0..1).
+function glide(b, from, to, k) {
+  b.pos.lerpVectors(from, to, k);
+  b.pos.y += Math.sin(k * Math.PI) * 3;
+  const dx = to.x - from.x, dz = to.z - from.z;
+  if (dx || dz) b.yaw = Math.atan2(dx, dz);
+  updateBox(b);
 }
 
 function barrage(g, e) {
@@ -373,7 +417,7 @@ function barrage(g, e) {
   g.audio.play('ceo_fire', e.pos);
 }
 
-const flying = (e) => e.act === 'perch' || e.act?.startsWith('fly');
+const flying = (e) => e.act === 'perch' || e.act === 'tattle' || e.act?.startsWith('fly');
 
 const alive = (e) => e.minions.filter((m) => !m.dead).length;
 
@@ -430,19 +474,35 @@ function startDying(g, e) {
   g.shake += 0.6;
 }
 
+// ── the decoy fly (a prop: shootable, not a kill; Bart moves it) ────────────────────────────
+const DECOY = {
+  hp: 1, r: FLY_R, h: FLY_H, pain: 0, blood: 0x1a1a1a, body: 0x101014, prop: true,
+  build() {
+    const root = new THREE.Group(), { fly, wings } = makeFly(root, new THREE.MeshBasicMaterial({ color: 0xffd040, side: THREE.DoubleSide }));
+    return { root, mats: [], legs: [], arms: [], wings, fly };
+  },
+  onDeath(g, e) {
+    g.fx.burst(v.set(e.pos.x, e.pos.y + 0.8, e.pos.z), 0x1a1a1a, 14, 5, 0.1, 0.5);
+    g.audio.play('ceo_buzz', e.pos);
+    if (e.bart) e.bart.decoyHit = true;
+  },
+};
+
 // ── the type ──────────────────────────────────────────────────────────────────────────────
 export const CEO = {
+  bartfly: DECOY,
   ceo: {
-    hp: 4500, speed: 3.2, r: 1.2, h: 4.2, range: 60, keep: 10, cd: [2, 3], tell: 0.8, pain: 0, blood: 0x7a1010, body: 0x1c1c28, boss: true, name: 'BART, THE CEO', strafes: false,
+    hp: 4500, speed: 3.2, r: 1.2, h: 4.2, range: 60, keep: 10, cd: [2, 3], tell: 0.8, pain: 0, blood: 0x7a1010, body: 0x6e6252, boss: true, name: 'BART, THE CEO', strafes: false,
     build() {
       const m = build();
-      return { ...m, flyT: 12, ph: 1, act: null, actT: 0, actMax: 1, rings: [], marks: [], minions: [], summonN: 0, pendingSummon: 0, anim: 0, last: null, repeat: 0, burnT: 0, lastWeapon: null };
+      return { ...m, flyT: 6, decoys: [], ph: 1, act: null, actT: 0, actMax: 1, rings: [], marks: [], minions: [], summonN: 0, pendingSummon: 0, anim: 0, last: null, repeat: 0, burnT: 0, lastWeapon: null };
     },
     attack() {},
 
     onDamage(g, e, dmg, src, weapon) {
       if (e.state === 'dormant') e.state = 'chase'; // shooting him starts the meeting
-      if (e.act === 'flyTo' || e.act === 'perch') { if (src === 'player') e.swatted = true; return 0; }
+      if (e.act === 'flyTo' || e.act === 'perch' || e.act === 'tattle') { if (src === 'player') e.swatted = true; return 0; }
+      if (e.act === 'stun' && e.swatStun) dmg *= 1.5; // swatted: open season
       if (e.act === 'flyOut' || e.act === 'flyHome' || e.act === 'flyIn') return 0;
       if (e.finalBlow) return dmg;
       if (e.act === 'dying' || e.pendingPhase || e.pendingDeath) return 0;
@@ -524,9 +584,12 @@ export const CEO = {
             armR = Math.sin(e.walk) * 0.4; armL = -Math.sin(e.walk) * 0.4;
             e.flyT -= dt;
             if (e.cd <= 0 && !p.dead && e.flyT <= 0) {
-              setAct(e, 'flyOut', 0.7);
+              setAct(e, 'flyOut', 0.9);
               g.audio.play('ceo_laugh', e.pos);
+              g.audio.play('ceo_summon', e.pos);
+              g.hud.banner?.('FLY ON THE WALL');
               g.hud.msg('BART IS A FLY ON THE WALL...', 2);
+              g.shake += 0.5;
             } else if (e.cd <= 0 && !p.dead) choose(g, e, dist);
             break;
           }
@@ -537,8 +600,21 @@ export const CEO = {
             break;
           case 'flyTo':
           case 'perch':
+          case 'tattle':
           case 'flyHome': {
-            for (const [i, w] of e.wings.entries()) w.rotation.z = Math.sin(e.anim * 60) * 0.6 * (i ? 1 : -1);
+            flap(e.wings, e.anim);
+            for (const { d, to } of e.decoys) {
+              if (d.dead) continue;
+              flap(d.wings, e.anim + d.seed);
+              if (e.act === 'flyTo') glide(d, e.flyA, o.set(to.x, to.y, to.z), k);
+              else { d.pos.y = to.y + Math.sin(e.anim * 9 + d.seed) * 0.05; d.yaw = to.yaw + Math.sin(e.anim * 3 + d.seed) * 0.3; updateBox(d); }
+            }
+            if (e.decoyHit) {
+              e.decoyHit = false;
+              g.audio.play('ceo_laugh', e.pos);
+              g.hud.msg('WRONG BART!', 1.2);
+              if (e.act === 'perch') e.actT -= 1; // he's still taking notes, faster now
+            }
             if ((e.buzzT = (e.buzzT ?? 0) - dt) <= 0) { e.buzzT = 0.3; g.audio.play('ceo_buzz', e.pos); }
             if (e.swatted) {
               // Knocked off the wall: full size again a few metres out, falls, stunned.
@@ -548,30 +624,45 @@ export const CEO = {
               for (let i = 0; i < 12 && !free(g, x, z, e.bigR + 0.2); i++) { x += (c.x - x) * 0.25; z += (c.z - z) * 0.25; }
               if (!free(g, x, z, e.bigR + 0.2)) ({ x, z } = e.flyFrom);
               toBig(g, e, Math.min(b.x1, Math.max(b.x0, x)), e.pos.y, Math.min(b.z1, Math.max(b.z0, z)));
-              setAct(e, 'stun', 2.5);
+              popDecoys(g, e);
+              setAct(e, 'stun', 3.5);
+              e.swatStun = true;
               g.audio.play('ceo_crash', e.pos);
-              g.shake += 0.5;
-              g.fx.burst(v.set(e.pos.x, e.pos.y + 1, e.pos.z), 0x2a2a2a, 24, 6, 0.15, 0.6);
-              g.hud.msg('SWATTED! GO GO GO', 1.5);
+              g.audio.play('explode', e.pos);
+              g.shake += 0.9;
+              g.hitstop = Math.max(g.hitstop, 0.15);
+              g.fx.burst(v.set(e.pos.x, e.pos.y + 1, e.pos.z), 0x2a2a2a, 30, 7, 0.15, 0.7);
+              g.fx.burst(v, 0xffd040, 20, 6, 0.12, 0.8);
+              g.hud.banner?.('SWATTED!');
+              g.hud.msg('SWATTED! HIT HIM WHILE HE IS DOWN', 2);
               break;
             }
             if (e.act === 'flyTo') {
-              glide(e, o.set(e.perch.x, e.perch.y, e.perch.z), k);
-              if (e.actT <= 0) { e.yaw = e.perch.yaw; setAct(e, 'perch', 7); g.hud.msg('LISTENING IN... SWAT HIM!', 2.5); }
-            } else if (e.act === 'perch') {
+              glide(e, e.flyA, o.set(e.perch.x, e.perch.y, e.perch.z), k);
+              if (e.actT <= 0) { e.yaw = e.perch.yaw; setAct(e, 'perch', 6); e.lastSec = 0; }
+            } else if (e.act === 'perch' || e.act === 'tattle') {
               e.pos.y = e.perch.y + Math.sin(e.anim * 9) * 0.05;
               e.yaw = e.perch.yaw + Math.sin(e.anim * 3) * 0.3;
-              if (e.actT <= 0) {
-                g.hud.msg('HE HEARD EVERYTHING', 2);
-                barrage(g, e);
-                e.flyA = e.pos.clone();
-                setAct(e, 'flyHome', 1.2);
+              updateBox(e);
+              if (e.act === 'perch') {
+                const sec = Math.ceil(e.actT);
+                if (sec !== e.lastSec && sec > 0) { e.lastSec = sec; g.hud.msg(`LISTENING IN... ${sec} — SWAT THE REAL BART!`, 1.1); g.audio.play('ceo_ping', e.pos); }
+                if (e.actT <= 0) {
+                  g.hud.banner?.('HE HEARD EVERYTHING');
+                  g.audio.play('ceo_laugh', e.pos);
+                  popDecoys(g, e);
+                  setAct(e, 'tattle', 1.3);
+                  e.volleys = 0;
+                }
+              } else {
+                // Three bitterballen volleys from the wall, then home.
+                if (e.volleys < 3 && e.actT <= 1.3 - e.volleys * 0.4) { e.volleys++; barrage(g, e); }
+                if (e.actT <= 0) { e.flyA = e.pos.clone(); setAct(e, 'flyHome', 1.2); }
               }
             } else {
-              glide(e, e.flyFrom, k);
+              glide(e, e.flyA, e.flyFrom, k);
               if (e.actT <= 0) { toBig(g, e, e.flyFrom.x, e.flyFrom.y, e.flyFrom.z); e.root.scale.setScalar(0.08); setAct(e, 'flyIn', 0.5); }
             }
-            updateBox(e);
             break;
           }
           case 'flyIn':
@@ -649,7 +740,7 @@ export const CEO = {
             e.stars.rotation.y += dt * 8;
             lean = -0.3 + Math.sin(e.anim * 6) * 0.15; armR = armL = 0.4;
             e.yaw += Math.sin(e.anim * 5) * dt;
-            if (e.actT <= 0) { e.stars.visible = false; toIdle(e, 0.6); }
+            if (e.actT <= 0) { e.stars.visible = false; e.swatStun = false; toIdle(e, 0.6); }
             break;
           case 'summon':
             turn(4);
@@ -741,7 +832,7 @@ export const CEO = {
       // Big multi-burst: suit, skin, gold.
       for (let i = 0; i < 4; i++) {
         const at = new THREE.Vector3(e.pos.x + rand(-1, 1), e.pos.y + 0.8 + i * 0.9, e.pos.z + rand(-1, 1));
-        g.fx.gibs(at, [e.def.blood, 0x1c1c28, 0x8a1c14, 0xffc020, 0xe8e4d8], 16);
+        g.fx.gibs(at, [e.def.blood, 0x6e6252, 0xd8cdb4, 0x9a5420, 0xe0b020], 16); // robe, tunic, bitterballen, mustard
         g.fx.explosion(at, 2.5, i % 2 ? 0xffc020 : 0xff6020);
       }
       g.fx.burst(v.set(e.pos.x, e.pos.y + 3, e.pos.z), 0xffd040, 60, 12, 0.12, 1.6); // golden parachute payout

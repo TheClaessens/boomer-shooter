@@ -75,7 +75,8 @@ export default {
     for (const [a, b] of [[-16, 8], [12, 16]]) B.box(-15.98, 3.1, a, -15.92, 3.4, b, STRIPE, NS);
     for (const [a, b] of [[-16, -2.6], [2.6, 16]]) B.box(15.92, 3.1, a, 15.98, 3.4, b, STRIPE, NS);
     B.box(15.9, 5.6, -4, 15.98, 7.6, 4, ['wood', 0x4a3428], NS);
-    B.box(15.86, 6.3, -3.2, 15.9, 6.9, 3.2, 0xffc040, { solid: false, glow: true });
+    B.decal(15.85, 6.6, 0, 'w', 5);
+    B.decal(0, 9, -15.9, 's', 12); // big Faktion logo over the red door, the first thing you see
     B.box(15.88, 1.2, 2.6, 15.95, 1.6, 2.9, 0xff3020, { solid: false, glow: true }); // call button
     B.box(-15.98, 1.2, 1.5, -15.9, 2.8, 6, 0x1a1a1a, NS);
     for (let y = 1.45; y < 2.6; y += 0.22) B.box(-15.9, y, 1.8, -15.86, y + 0.06, 5.7 - (y * 7 % 1.5), 0xd8d8c8, { solid: false, glow: true });
@@ -129,6 +130,7 @@ export default {
     B.hall(-19.5, 8, -16.5, 12, 0, 3.5, PAL.CUBES, true);
     B.door(-18.25, 0, 8, -17.75, 3.5, 12, 0x7a6a50);
     B.room(-52, -16, -20, 24, 0, 3.5, PAL.CUBES, { e: [[8, 12, 3.5]], n: [[-40, -36, 3]], w: [[0, 3, 3.5]] });
+    B.decal(-51.9, 2.4, 12, 'e', 3.6);
     const PART = ['cubicle', 0x5d6b78];
     for (const z of [-10, -4, 2, 8, 14, 20]) {
       for (const [a, b] of [[z === 20 ? -44.8 : -48, -38], [-35, -24]]) B.box(a, 0, z - 0.08, b, 1.9, z + 0.08, PART);

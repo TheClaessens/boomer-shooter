@@ -1,3 +1,4 @@
+import LOGO from './brand/faktion-logo.svg?inline';
 import { RANKS, rankOf, grade } from './style.js';
 import { WEAPONS, ORDER, AMMO_MAX } from './weapons.js';
 import { DASH_CHARGES } from './player.js';
@@ -106,7 +107,7 @@ export class Hud {
   }
 
   intro(levelName) {
-    const [kick, name] = levelName.includes(':') ? levelName.split(/:\s*/) : ['OVERTIME TOWER', levelName];
+    const [kick, name] = levelName.includes(':') ? levelName.split(/:\s*/) : ['FAKTION HQ', levelName];
     $('introkick').textContent = kick;
     $('introname').textContent = name;
     replay($('intro'), 'go');
@@ -250,11 +251,11 @@ export class Hud {
         if (!save.unlocked.includes(id)) return `<button class="floor" disabled><span class="fl">${String(i + 1).padStart(2, '0')}</span><span class="nm"><s>CLASSIFIED</s></span><span class="lock">LOCKED</span></button>`;
         return `<button class="floor" data-action="start" data-arg="${id}"><span class="fl">${String(i + 1).padStart(2, '0')}</span><span class="nm">${L.name}</span><span class="best">${best ? `BEST ${best}` : L.par ? `PAR ${fmt(L.par)}` : ''}</span></button>`;
       };
-      el.innerHTML = `<div class="logo"><h1>OVERTIME</h1><p class="tag">Demons came in through the server room. Your shift isn't over.</p></div>
+      el.innerHTML = `<div class="logo"><img class="brand" src="${LOGO}" alt="Faktion"><h1>OVERTIME</h1><p class="tag">Demons came in through the server room. Your shift isn't over.</p></div>
         <div class="paper memo">
           <div class="clip"></div>
           <div class="head">INTEROFFICE MEMO</div>
-          <table class="meta"><tr><td>TO:</td><td>All remaining staff</td></tr><tr><td>FROM:</td><td>Management (possessed)</td></tr><tr><td>RE:</td><td>Mandatory overtime</td></tr></table>
+          <table class="meta"><tr><td>TO:</td><td>All remaining Faktioneers</td></tr><tr><td>FROM:</td><td>Management (possessed)</td></tr><tr><td>RE:</td><td>Mandatory overtime</td></tr></table>
           <div class="menu">${campaign.map(floor).join('')}
             <button class="floor endless" data-action="start" data-arg="overtime"><span class="fl">&#8734;</span><span class="nm">OVERTIME <small>endless</small></span><span class="best">${save.best.overtime ? `BEST ${save.best.overtime}` : 'NO CAP'}</span></button>
           </div>

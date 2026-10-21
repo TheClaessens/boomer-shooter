@@ -4,11 +4,13 @@ import { hurtPlayer, damageEnemy, spawnProjectile, hitscan, losClear, blast } fr
 import { registerProjectiles } from '../projectiles.js';
 import { registerSounds } from '../audio.js';
 import { center, revive } from './index.js';
+import { FACES, imageTexture } from '../textures.js';
 
 // The tower's staff. Each enemy teaches one skill. keep: preferred distance; cd: seconds between attacks; tell: wind-up.
 // Generic-AI extras (turn, retreat, weave, jitter, stride, floats, death, lie) are documented in index.js.
 
-const cube = new THREE.BoxGeometry(1, 1, 1);
+const cube = new THREE.BoxGeometry(1, 1, 1), facePlane = new THREE.PlaneGeometry(1, 1);
+let faceN = 0; // round-robin over src/faces so every colleague shows up
 const v = new THREE.Vector3(), dir = new THREE.Vector3(), muzzle = new THREE.Vector3(), eye = new THREE.Vector3();
 const DOWN = new THREE.Vector3(0, -1, 0), ZERO = new THREE.Vector3();
 const lerp = (a, b, k) => a + (b - a) * k;
@@ -58,7 +60,17 @@ function humanoid(o) {
   part(t, tw, th, td, o.shirt, 0, th / 2, 0);
   const h = (k.head = pivot(0, th, o.headZ ?? 0, t));
   part(h, hw, hh, hd, o.skin, 0, hh / 2 + 0.02, 0);
-  for (const s of [-1, 1]) part(h, 0.07, 0.05, 0.02, o.eye ?? 0xff2010, s * hw * 0.26, hh * 0.6, hd / 2 + 0.01, true);
+  if (FACES.length) {
+    // A colleague's photo on the front of the head; it flashes with the body (in k.mats).
+    // emissiveMap: the rest glow and hit flash light the photo itself instead of greying it out.
+    const tex = imageTexture(FACES[faceN++ % FACES.length], 128);
+    const m = new THREE.MeshLambertMaterial({ map: tex, emissiveMap: tex });
+    k.mats.push(m);
+    const f = new THREE.Mesh(facePlane, m);
+    f.scale.set(hw, hh, 1);
+    f.position.set(0, hh / 2 + 0.02, hd / 2 + 0.025); // in front of the painted-on mouths and glasses
+    h.add(f);
+  } else for (const s of [-1, 1]) part(h, 0.07, 0.05, 0.02, o.eye ?? 0xff2010, s * hw * 0.26, hh * 0.6, hd / 2 + 0.01, true);
   k.hands = [];
   const [fw, fh] = o.fist ?? [o.armW * 0.9, 0.11];
   for (const s of [-1, 1]) {

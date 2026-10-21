@@ -438,3 +438,29 @@ export function surface(key, color, { transparent = false, opacity = 1 } = {}) {
   materials.set(id, m);
   return m;
 }
+
+// An image (SVG or photo URL) drawn cover-cropped into a w×h canvas, so SVGs rasterise sharp and photos come out
+// square. bg + pad: a solid plate with the image fitted inside it (signs). Cached; the canvas fills in once it loads.
+const images = new Map();
+export function imageTexture(url, w, h = w, { bg, pad = 0 } = {}) {
+  const id = `${url}|${w}|${h}|${bg}|${pad}`;
+  if (images.has(id)) return images.get(id);
+  const cv = document.createElement('canvas');
+  cv.width = w;
+  cv.height = h;
+  const t = new THREE.CanvasTexture(cv), img = new Image();
+  img.onload = () => {
+    const c = cv.getContext('2d'), iw = img.naturalWidth || w, ih = img.naturalHeight || h;
+    const s = pad ? Math.min((w - 2 * pad) / iw, (h - 2 * pad) / ih) : Math.max(w / iw, h / ih);
+    if (bg) { c.fillStyle = bg; c.fillRect(0, 0, w, h); }
+    c.drawImage(img, (w - iw * s) / 2, (h - ih * s) / 2, iw * s, ih * s);
+    t.needsUpdate = true;
+  };
+  img.src = url;
+  t.colorSpace = THREE.SRGBColorSpace;
+  images.set(id, t);
+  return t;
+}
+
+// Colleague photos for enemy faces (src/faces/*), inlined as data URLs so a single-file build carries them.
+export const FACES = Object.values(import.meta.glob('./faces/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG}', { eager: true, query: '?inline', import: 'default' }));

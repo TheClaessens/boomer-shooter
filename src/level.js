@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
-import { surface } from './textures.js';
+import { surface, imageTexture } from './textures.js';
+import LOGO from './brand/faktion-logo.svg?inline';
 import { updateBox } from './physics.js';
 
 // Level builder. Units are metres, y up. Level modules (src/levels/*.js) get a builder `B` and describe geometry with it;
@@ -119,6 +120,18 @@ export function createBuilder(scene) {
       return l;
     },
 
+    // Flat unlit sign (centre x,y,z) facing 'n' (-z), 's', 'w' or 'e', w metres wide: the Faktion logo on a dark plate.
+    // Not solid; hang it a hair off a wall.
+    decal(x, y, z, face, w, url = LOGO, aspect = 0.4) {
+      const mat = new THREE.MeshBasicMaterial({ map: imageTexture(url, 1024, Math.round(1024 * aspect), { bg: '#1a1a1a', pad: 90 }) });
+      const mesh = new THREE.Mesh(plane, mat);
+      mesh.scale.set(w, w * aspect, 1);
+      mesh.position.set(x, y, z);
+      mesh.rotation.y = { s: 0, n: Math.PI, e: Math.PI / 2, w: -Math.PI / 2 }[face];
+      scene.add(mesh);
+      return mesh;
+    },
+
     flesh(x, y, z, s = 1) {
       for (let i = 0; i < 4; i++) {
         const m = new THREE.Mesh(blob, fleshMat());
@@ -175,6 +188,7 @@ export function createBuilder(scene) {
 }
 
 const blob = new THREE.IcosahedronGeometry(1, 0);
+const plane = new THREE.PlaneGeometry(1, 1);
 let _flesh;
 const fleshMat = () => (_flesh ??= surface('flesh', 0xa02838));
 

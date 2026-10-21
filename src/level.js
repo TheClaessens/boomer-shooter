@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { surface, imageTexture } from './textures.js';
-import LOGO from './brand/faktion-logo.svg?inline';
+import LOGO from './brand/faktion-logo.svg';
 import { updateBox } from './physics.js';
 
 // Level builder. Units are metres, y up. Level modules (src/levels/*.js) get a builder `B` and describe geometry with it;

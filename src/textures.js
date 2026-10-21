@@ -462,5 +462,5 @@ export function imageTexture(url, w, h = w, { bg, pad = 0 } = {}) {
   return t;
 }
 
-// Colleague photos for enemy faces (src/faces/*), inlined as data URLs so a single-file build carries them.
-export const FACES = Object.values(import.meta.glob('./faces/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG}', { eager: true, query: '?inline', import: 'default' }));
+// Colleague photos for enemy faces (src/faces/*), inlined as data URLs at build time (vite.config.js).
+export const FACES = Object.values(import.meta.glob('./faces/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG}', { eager: true, import: 'default' }));

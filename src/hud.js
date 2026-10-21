@@ -1,4 +1,4 @@
-import LOGO from './brand/faktion-logo.svg?inline';
+import LOGO from './brand/faktion-logo.svg';
 import { RANKS, rankOf, grade } from './style.js';
 import { WEAPONS, ORDER, AMMO_MAX } from './weapons.js';
 import { DASH_CHARGES } from './player.js';

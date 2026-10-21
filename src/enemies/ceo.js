@@ -1,15 +1,20 @@
 import * as THREE from 'three';
-import { moveBody } from '../physics.js';
+import { moveBody, updateBox } from '../physics.js';
 import { hurtPlayer, damageEnemy, spawnProjectile, blast, addEnemy } from '../world.js';
 import { registerProjectiles } from '../projectiles.js';
 import { registerSounds } from '../audio.js';
 import { wake } from './index.js';
+import { imageTexture } from '../textures.js';
+import BART from '../brand/bart.png';
 
 // THE CEO. A 4 m demonic executive who runs the whole fight from think(): a small state machine per phase.
 //   P1 "Quarterly Results" (100–66 %): 5-fireball fan (0.6 s raise) · ground slam (0.9 s, red ring) → jumpable shockwave (20)
 //   P2 "Restructuring"     (66–33 %): + hiring spree (at 66 % and 50 %) · + bull charge (1 s tell, stuns on walls)
 //   P3 "Golden Parachute"  (33–0 %):  cooldowns ×0.7 · 9-fireball fan · sometimes a double slam · 2 burnouts every 10 s
 // Phase thresholds clamp damage, so every phase is seen. Dying is a 2.6 s sequence, then the real kill.
+// Faktion edition: he is Bart (photo face, halo, bitterballen for fireballs), and from P1 he turns into a
+//   FLY ON THE WALL every ~25 s: shrinks, buzzes to a wall and listens in for 7 s. Swat him (any hit) and he crashes
+//   down stunned; miss him and he heard everything: a bitterballen barrage from the wall.
 // Level hooks (optional): g.level.bossBounds {x0,x1,z0,z1}, g.level.bossStart(g), g.level.bossDefeated(g).
 
 const cube = new THREE.BoxGeometry(1, 1, 1);
@@ -20,7 +25,8 @@ const G = 28, TAU = Math.PI * 2;
 const PH_NAME = ['', 'QUARTERLY RESULTS', 'RESTRUCTURING', 'GOLDEN PARACHUTE'];
 
 registerProjectiles({
-  memo: { dmg: 14, splash: 0, gravity: 0, radius: 0.35, trail: 0xffa030, parts: [[0.5, 0.5, 0.5, 0xff7a10, true], [0.28, 0.28, 0.8, 0xffe070, true]] },
+  // Bitterballen: crumb-brown balls with a mustard trail.
+  memo: { dmg: 14, splash: 0, gravity: 0, radius: 0.35, trail: 0xe0b020, parts: [[0.5, 0.5, 0.5, 0xa0581c, true], [0.58, 0.36, 0.36, 0x7a3a10, true]] },
 });
 
 registerSounds({
@@ -39,6 +45,7 @@ registerSounds({
   ceo_crash(a, t, o) { a.noise(t, 0.8, 1.2, o, 'lowpass', 3000, 80); a.osc('square', 110, 40, t, 0.4, 0.6, o); [880, 660].forEach((f, i) => a.osc('square', f, f, t + 0.3 + i * 0.15, 0.1, 0.15, o)); },
   ceo_summon(a, t, o) { [0, 3, 7, 10, 12].forEach((n, i) => a.osc('square', 220 * 2 ** (n / 12), 220 * 2 ** (n / 12), t + i * 0.09, 0.2, 0.18, o)); a.noise(t, 1, 0.4, o, 'bandpass', 300, 2500, 2); },
   ceo_phase(a, t, o) { SND.roar(a, t, o); [55, 82.5, 110].forEach((f) => a.osc('sawtooth', f, f * 0.97, t, 2.2, 0.3, o)); a.noise(t, 2, 0.5, o, 'highpass', 4000, 1500); },
+  ceo_buzz(a, t, o) { a.osc('sawtooth', 210, 230, t, 0.32, 0.25, o); a.osc('sawtooth', 214, 226, t, 0.32, 0.2, o); },
   ceo_ping(a, t, o) { a.osc('square', 1900, 1500, t, 0.08, 0.2, o); },
   ceo_death(a, t, o) {
     a.osc('sawtooth', 320, 25, t, 3.2, 0.7, o); a.osc('sawtooth', 330, 27, t, 3.2, 0.5, o);
@@ -68,7 +75,7 @@ function build() {
   };
   const pivot = (parent, x, y, z) => { const g = new THREE.Group(); g.position.set(x, y, z); parent.add(g); return g; };
   const glow = (color) => new THREE.MeshBasicMaterial({ color });
-  const SUIT = 0x2e2a44, STRIPE = 0x5a5a7a, SKIN = 0x8a1c14, SHIRT = 0xe8e4d8, HORN = 0xd8c8a0, GOLD = glow(0xffc020);
+  const SUIT = 0x2e2a44, STRIPE = 0x5a5a7a, SKIN = 0xd0a080, SHIRT = 0xe8e4d8, GOLD = glow(0xffc020);
 
   const legs = [];
   for (const s of [-1, 1]) {
@@ -92,20 +99,21 @@ function build() {
   part(body, 0.55, 0.3, 0.55, SKIN, 0, 1.9, 0);
 
   const head = pivot(body, 0, 2.4, 0.05);
+  head.scale.setScalar(1.35);
   part(head, 0.95, 0.95, 0.9, SKIN, 0, 0, 0);
-  part(head, 1.05, 0.38, 0.98, 0x701410, 0, -0.33, 0.02);
-  part(head, 1.02, 0.24, 0.96, 0x0a0a0c, 0, 0.5, -0.02);
+  part(head, 1.05, 0.38, 0.98, 0x4a3a2c, 0, -0.33, 0.02); // beard
+  part(head, 1.02, 0.24, 0.96, 0x4a3626, 0, 0.5, -0.02); // hair
+  // Bart's face (flashes with the body), and a halo that doubles as the old eye glow: white on tells, red in P3.
+  const faceTex = imageTexture(BART, 256), faceMat = new THREE.MeshLambertMaterial({ map: faceTex, emissiveMap: faceTex, emissiveIntensity: 2 });
+  mats.push(faceMat);
+  part(head, 0.95, 0.95, 0.01, 0, 0, 0, 0.52, faceMat);
   const eyeMat = glow(0xffd040);
-  for (const s of [-1, 1]) {
-    part(head, 0.24, 0.11, 0.05, 0, s * 0.22, 0.08, 0.46, eyeMat);
-    part(head, 0.32, 0.08, 0.06, 0x200808, s * 0.22, 0.2, 0.46).rotation.z = s * 0.35; // angry brows
-    // Horns: three segments curling up and out.
-    part(head, 0.24, 0.6, 0.24, HORN, s * 0.55, 0.55, 0).rotation.z = -s * 0.55;
-    part(head, 0.18, 0.55, 0.18, 0xb09870, s * 0.82, 1.0, 0).rotation.z = -s * 0.2;
-    part(head, 0.11, 0.4, 0.11, 0x2a1a10, s * 0.88, 1.42, 0).rotation.z = s * 0.25;
-  }
-  part(head, 0.62, 0.12, 0.04, 0x080404, 0, -0.3, 0.5);
-  for (const x of [-0.22, -0.07, 0.07, 0.22]) part(head, 0.07, 0.08, 0.04, 0xf0f0e0, x, -0.26, 0.52);
+  eyeMat.side = THREE.DoubleSide;
+  const halo = new THREE.Mesh(flatRing, eyeMat);
+  halo.rotation.x = -Math.PI / 2 + 0.25;
+  halo.scale.setScalar(0.55);
+  halo.position.set(0, 0.95, -0.15);
+  head.add(halo);
   const stars = pivot(head, 0, 0.95, 0);
   for (let i = 0; i < 3; i++) part(stars, 0.16, 0.16, 0.16, 0, Math.cos(i * 2.1) * 0.75, 0, Math.sin(i * 2.1) * 0.75, glow(0xffee40));
   stars.visible = false;
@@ -158,7 +166,24 @@ function build() {
   light.position.set(0, 1.4, 1.6);
   body.add(light);
 
-  return { root, mats, legs, arms: [], limbs: arms, body, head, palms, lid, papers, orb, chute, stars, slamRing, lane, eyeMat, light };
+  // The fly: Bart's face on a buzzing black body, hidden until he shrinks.
+  const fly = pivot(root, 0, 0.8, 0);
+  fly.scale.setScalar(1.8); // big enough to spot (and hit) at night
+  part(fly, 0.4, 0.34, 0.55, 0x101014, 0, 0, -0.1);
+  part(fly, 0.5, 0.5, 0.01, 0, 0, 0.05, 0.19, new THREE.MeshBasicMaterial({ map: faceTex })); // unlit: findable at night
+  const flyHalo = new THREE.Mesh(flatRing, eyeMat);
+  flyHalo.rotation.x = -Math.PI / 2 + 0.25;
+  flyHalo.scale.setScalar(0.28);
+  flyHalo.position.set(0, 0.42, 0.05);
+  fly.add(flyHalo);
+  const wings = [-1, 1].map((s) => {
+    const w = pivot(fly, s * 0.18, 0.18, -0.15);
+    part(w, 0.7, 0.02, 0.4, 0, s * 0.35, 0, 0, new THREE.MeshBasicMaterial({ color: 0xc8e0ff, transparent: true, opacity: 0.6 }));
+    return w;
+  });
+  fly.visible = false;
+
+  return { root, mats, legs, arms: [], limbs: arms, body, head, palms, lid, papers, orb, chute, stars, slamRing, lane, eyeMat, light, fly, wings };
 }
 
 // ── helpers ──────────────────────────────────────────────────────────────────────────────
@@ -286,6 +311,70 @@ function flushMarks(g, e, spawn) {
   e.marks.length = 0;
 }
 
+// ── fly on the wall ────────────────────────────────────────────────────────────────────────
+const FLY_R = 0.7, FLY_H = 1.4;
+
+// A spot 0.35 m off the side of a tall solid near the arena, at 2–3.5 m, facing back toward the arena centre.
+function perchSpot(g, e) {
+  const b = boundsOf(g), cx = (b.x0 + b.x1) / 2, cz = (b.z0 + b.z1) / 2, y0 = e.pos.y;
+  const tall = g.solids.filter((s) => !s.clip && s.y1 > y0 + 3 && s.y0 < y0 + 2 && s.x1 > b.x0 - 2 && s.x0 < b.x1 + 2 && s.z1 > b.z0 - 2 && s.z0 < b.z1 + 2);
+  if (!tall.length) return { x: rand(b.x0, b.x1), y: y0 + 3, z: rand(b.z0, b.z1), yaw: 0 };
+  const s = tall[Math.floor(Math.random() * tall.length)], mx = (s.x0 + s.x1) / 2, mz = (s.z0 + s.z1) / 2;
+  const y = Math.min(s.y1 - 0.6, Math.max(s.y0, y0) + rand(2, 3.5));
+  const along = (a0, a1) => (a1 - a0 > 0.6 ? rand(a0 + 0.3, a1 - 0.3) : (a0 + a1) / 2);
+  if (Math.abs(cx - mx) > Math.abs(cz - mz)) {
+    const sx = Math.sign(cx - mx);
+    return { x: sx > 0 ? s.x1 + 0.35 : s.x0 - 0.35, y, z: along(s.z0, s.z1), yaw: sx > 0 ? Math.PI / 2 : -Math.PI / 2 };
+  }
+  const sz = Math.sign(cz - mz);
+  return { x: along(s.x0, s.x1), y, z: sz > 0 ? s.z1 + 0.35 : s.z0 - 0.35, yaw: sz > 0 ? 0 : Math.PI };
+}
+
+function toFly(g, e) {
+  e.root.scale.setScalar(1);
+  e.body.visible = false;
+  for (const l of e.legs) l.visible = false;
+  e.fly.visible = true;
+  e.bigR = e.r; e.bigH = e.h;
+  e.r = FLY_R; e.h = FLY_H;
+  e.flyFrom = e.pos.clone();
+  e.perch = perchSpot(g, e);
+  e.flyA = e.pos.clone();
+  setAct(e, 'flyTo', 1.4);
+}
+
+// Back to full size at (x, y, z); the regular movement code drops him to the floor.
+function toBig(g, e, x, y, z) {
+  e.body.visible = true;
+  for (const l of e.legs) l.visible = true;
+  e.fly.visible = false;
+  e.r = e.bigR; e.h = e.bigH;
+  e.pos.set(x, y, z);
+  e.vy = 0;
+  e.flyT = rand(22, 30) * cdMul(e);
+}
+
+// Glide from e.flyA to `to` along an arc over the actT window.
+function glide(e, to, k) {
+  e.pos.lerpVectors(e.flyA, to, k);
+  e.pos.y += Math.sin(k * Math.PI) * 3;
+  const dx = to.x - e.flyA.x, dz = to.z - e.flyA.z;
+  if (dx || dz) e.yaw = Math.atan2(dx, dz);
+}
+
+function barrage(g, e) {
+  const p = g.player, from = v.set(e.pos.x, e.pos.y + 0.5, e.pos.z).clone();
+  o.set(p.pos.x, p.pos.y + 1, p.pos.z).sub(from).normalize();
+  for (let i = 0; i < 7; i++) {
+    const dir = o.clone().add(new THREE.Vector3(rand(-0.12, 0.12), rand(-0.06, 0.08), rand(-0.12, 0.12))).normalize();
+    spawnProjectile(g, 'memo', from, dir.multiplyScalar(rand(13, 17)), e);
+  }
+  g.fx.burst(from, 0xe0b020, 16, 5, 0.12, 0.4);
+  g.audio.play('ceo_fire', e.pos);
+}
+
+const flying = (e) => e.act === 'perch' || e.act?.startsWith('fly');
+
 const alive = (e) => e.minions.filter((m) => !m.dead).length;
 
 function choose(g, e, dist) {
@@ -337,22 +426,24 @@ function startDying(g, e) {
   e.lane.visible = e.slamRing.visible = e.orb.visible = false;
   e.hp = 0.01;
   g.audio.play('ceo_death', e.pos);
-  g.hud.msg('NOOO! MY STOCK OPTIONS!', 2.5);
+  g.hud.msg('NOOO! MY BITTERBALLEN!', 2.5);
   g.shake += 0.6;
 }
 
 // ── the type ──────────────────────────────────────────────────────────────────────────────
 export const CEO = {
   ceo: {
-    hp: 4500, speed: 3.2, r: 1.2, h: 4.2, range: 60, keep: 10, cd: [2, 3], tell: 0.8, pain: 0, blood: 0x7a1010, body: 0x1c1c28, boss: true, name: 'THE CEO', strafes: false,
+    hp: 4500, speed: 3.2, r: 1.2, h: 4.2, range: 60, keep: 10, cd: [2, 3], tell: 0.8, pain: 0, blood: 0x7a1010, body: 0x1c1c28, boss: true, name: 'BART, THE CEO', strafes: false,
     build() {
       const m = build();
-      return { ...m, ph: 1, act: null, actT: 0, actMax: 1, rings: [], marks: [], minions: [], summonN: 0, pendingSummon: 0, anim: 0, last: null, repeat: 0, burnT: 0, lastWeapon: null };
+      return { ...m, flyT: 12, ph: 1, act: null, actT: 0, actMax: 1, rings: [], marks: [], minions: [], summonN: 0, pendingSummon: 0, anim: 0, last: null, repeat: 0, burnT: 0, lastWeapon: null };
     },
     attack() {},
 
     onDamage(g, e, dmg, src, weapon) {
       if (e.state === 'dormant') e.state = 'chase'; // shooting him starts the meeting
+      if (e.act === 'flyTo' || e.act === 'perch') { if (src === 'player') e.swatted = true; return 0; }
+      if (e.act === 'flyOut' || e.act === 'flyHome' || e.act === 'flyIn') return 0;
       if (e.finalBlow) return dmg;
       if (e.act === 'dying' || e.pendingPhase || e.pendingDeath) return 0;
       if (e.act === 'phase') {
@@ -391,7 +482,7 @@ export const CEO = {
           g.audio.setBoss?.(true);
           g.level.bossStart?.(g);
           g.hud.banner?.('BOARD MEETING');
-          g.hud.msg('THE CEO WILL SEE YOU NOW', 3);
+          g.hud.msg('BART WILL SEE YOU NOW', 3);
           g.audio.play('ceo_laugh', e.pos);
         }
         if (e.pendingDeath && e.act !== 'dying') { e.pendingDeath = false; e.pendingPhase = 0; startDying(g, e); }
@@ -400,7 +491,7 @@ export const CEO = {
         const k = 1 - Math.max(0, e.actT) / e.actMax; // tell progress 0..1
 
         // Phase 3: two burnouts every 10 s, marked by red rings 1 s ahead, far from the player (≤ 2 alive).
-        if (e.ph >= 3 && e.act !== 'dying' && e.act !== 'phase' && e.act !== 'summon') {
+        if (e.ph >= 3 && e.act !== 'dying' && e.act !== 'phase' && e.act !== 'summon' && !flying(e)) {
           if ((e.burnT -= dt) <= 0) {
             e.burnT = 10;
             const burning = e.minions.filter((m) => !m.dead && m.type === 'burnout').length;
@@ -431,9 +522,62 @@ export const CEO = {
             mx = (ux * want - uz * e.strafeDir * 0.5) * speed;
             mz = (uz * want + ux * e.strafeDir * 0.5) * speed;
             armR = Math.sin(e.walk) * 0.4; armL = -Math.sin(e.walk) * 0.4;
-            if (e.cd <= 0 && !p.dead) choose(g, e, dist);
+            e.flyT -= dt;
+            if (e.cd <= 0 && !p.dead && e.flyT <= 0) {
+              setAct(e, 'flyOut', 0.7);
+              g.audio.play('ceo_laugh', e.pos);
+              g.hud.msg('BART IS A FLY ON THE WALL...', 2);
+            } else if (e.cd <= 0 && !p.dead) choose(g, e, dist);
             break;
           }
+          case 'flyOut':
+            e.root.scale.setScalar(Math.max(0.08, 1 - k));
+            if (Math.random() < 0.6) g.fx.burst(v.set(e.pos.x + rand(-1, 1), e.pos.y + rand(0.5, 3) * (1 - k), e.pos.z + rand(-1, 1)), 0x2a2a2a, 2, 4, 0.12, 0.5);
+            if (e.actT <= 0) toFly(g, e);
+            break;
+          case 'flyTo':
+          case 'perch':
+          case 'flyHome': {
+            for (const [i, w] of e.wings.entries()) w.rotation.z = Math.sin(e.anim * 60) * 0.6 * (i ? 1 : -1);
+            if ((e.buzzT = (e.buzzT ?? 0) - dt) <= 0) { e.buzzT = 0.3; g.audio.play('ceo_buzz', e.pos); }
+            if (e.swatted) {
+              // Knocked off the wall: full size again a few metres out, falls, stunned.
+              e.swatted = false;
+              const b = boundsOf(g), c = v.set((b.x0 + b.x1) / 2, 0, (b.z0 + b.z1) / 2);
+              let x = e.pos.x, z = e.pos.z;
+              for (let i = 0; i < 12 && !free(g, x, z, e.bigR + 0.2); i++) { x += (c.x - x) * 0.25; z += (c.z - z) * 0.25; }
+              if (!free(g, x, z, e.bigR + 0.2)) ({ x, z } = e.flyFrom);
+              toBig(g, e, Math.min(b.x1, Math.max(b.x0, x)), e.pos.y, Math.min(b.z1, Math.max(b.z0, z)));
+              setAct(e, 'stun', 2.5);
+              g.audio.play('ceo_crash', e.pos);
+              g.shake += 0.5;
+              g.fx.burst(v.set(e.pos.x, e.pos.y + 1, e.pos.z), 0x2a2a2a, 24, 6, 0.15, 0.6);
+              g.hud.msg('SWATTED! GO GO GO', 1.5);
+              break;
+            }
+            if (e.act === 'flyTo') {
+              glide(e, o.set(e.perch.x, e.perch.y, e.perch.z), k);
+              if (e.actT <= 0) { e.yaw = e.perch.yaw; setAct(e, 'perch', 7); g.hud.msg('LISTENING IN... SWAT HIM!', 2.5); }
+            } else if (e.act === 'perch') {
+              e.pos.y = e.perch.y + Math.sin(e.anim * 9) * 0.05;
+              e.yaw = e.perch.yaw + Math.sin(e.anim * 3) * 0.3;
+              if (e.actT <= 0) {
+                g.hud.msg('HE HEARD EVERYTHING', 2);
+                barrage(g, e);
+                e.flyA = e.pos.clone();
+                setAct(e, 'flyHome', 1.2);
+              }
+            } else {
+              glide(e, e.flyFrom, k);
+              if (e.actT <= 0) { toBig(g, e, e.flyFrom.x, e.flyFrom.y, e.flyFrom.z); e.root.scale.setScalar(0.08); setAct(e, 'flyIn', 0.5); }
+            }
+            updateBox(e);
+            break;
+          }
+          case 'flyIn':
+            e.root.scale.setScalar(Math.max(0.08, k));
+            if (e.actT <= 0) { e.root.scale.setScalar(1); toIdle(e, 0.8); }
+            break;
           case 'fan':
             turn(8);
             armR = armL = -1.4 - k * 0.6;
@@ -546,6 +690,7 @@ export const CEO = {
         }
       }
 
+      if (e.fly.visible) return true; // a fly ignores gravity and the arena (positioned above)
       // Movement + gravity, kept inside the arena.
       e.vy -= G * dt;
       const hit = moveBody(e, mx * dt, e.vy * dt, mz * dt, g.solids);

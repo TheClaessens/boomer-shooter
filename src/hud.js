@@ -257,6 +257,7 @@ export class Hud {
           <div class="head">INTEROFFICE MEMO</div>
           <table class="meta"><tr><td>TO:</td><td>All remaining Faktioneers</td></tr><tr><td>FROM:</td><td>Management (possessed)</td></tr><tr><td>RE:</td><td>Mandatory overtime</td></tr></table>
           <div class="menu">${campaign.map(floor).join('')}
+            <button class="floor endless" data-action="start" data-arg="bart"><span class="fl">&#9733;</span><span class="nm">FINAL BOSS: BART <small>skip ahead</small></span><span class="best">${save.best.bart ? `BEST ${save.best.bart}` : 'CEO'}</span></button>
             <button class="floor endless" data-action="start" data-arg="overtime"><span class="fl">&#8734;</span><span class="nm">OVERTIME <small>endless</small></span><span class="best">${save.best.overtime ? `BEST ${save.best.overtime}` : 'NO CAP'}</span></button>
           </div>
           <table class="keys">
